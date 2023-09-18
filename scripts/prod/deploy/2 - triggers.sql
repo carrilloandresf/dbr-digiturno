@@ -52,3 +52,15 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+-- CREATE TRIGGER para la tabla tbUserCustomerRelation
+DELIMITER //
+CREATE TRIGGER update_tbUserCustomerRelation
+BEFORE INSERT ON tbUserCustomerRelation
+FOR EACH ROW
+BEGIN
+    SET NEW.registration_date = NOW();
+END;
+//
+DELIMITER ;
+

@@ -49,9 +49,7 @@ CREATE TABLE tbCustomers (
     phone_number VARCHAR(20),
     city VARCHAR(255),
     dialing_code_id INT,
-    user_id INT,
     FOREIGN KEY (dialing_code_id) REFERENCES tbDialingCodes(id),
-    FOREIGN KEY (user_id) REFERENCES tbUsers(id),
     INDEX (id),
     INDEX (phone_number)
 );
@@ -98,4 +96,18 @@ CREATE TABLE tbAccountBalances (
     INDEX (id),
     INDEX (user_id),
     INDEX (movement_type)
+);
+
+-- tbUserCustomerRelation (Tabla de relación muchos a muchos)
+CREATE TABLE tbUserCustomerRelation (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    registration_date DATE,
+    user_id INT,
+    customer_id INT,
+    FOREIGN KEY (user_id) REFERENCES tbUsers(id),
+    FOREIGN KEY (customer_id) REFERENCES tbCustomers(id),
+    INDEX (id),
+    INDEX (user_id),
+    INDEX (customer_id),
+    INDEX (registration_date)
 );

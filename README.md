@@ -61,7 +61,6 @@ Este repositorio contiene scripts SQL para gestionar la base de datos de un apli
   - `phone_number` (Número de celular)
   - `city` (Ciudad)
   - `dialing_code_id` (Clave foránea hacia tbDialingCodes)
-  - `user_id` (Clave foránea hacia tbUsers)
 
 ### tbTransactionTypes
 
@@ -94,6 +93,20 @@ Este repositorio contiene scripts SQL para gestionar la base de datos de un apli
   - `user_id` (Clave foránea hacia tbUsers)
   - `movement_type` (Tipo de movimiento: debe o haber)
   - `transaction_value` (Valor de la transacción)
+
+### tbUserCustomerRelation
+
+- **Descripción**: Esta tabla se utiliza para establecer relaciones muchos a muchos entre usuarios y clientes. Registra la fecha de registro de cada relación.
+- **Campos**:
+  - `id` (Clave primaria)
+  - `registration_date` (Fecha de registro)
+  - `user_id` (Clave foránea hacia tbUsers)
+  - `customer_id` (Clave foránea hacia tbCustomers)
+  - `INDEX (id)`
+  - `INDEX (user_id)`
+  - `INDEX (customer_id)`
+  - `INDEX (registration_date)`
+
 
 ## Instrucciones de Uso
 
