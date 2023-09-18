@@ -7,9 +7,10 @@ USE DIGITURNO;
 CREATE TABLE tbUsers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     registration_date DATE,
-    username VARCHAR(255) UNIQUE,
-    password VARCHAR(255),
-    full_name VARCHAR(255),
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(50),
+    first_name VARCHAR(250),
+    last_name varchar(250),
     address VARCHAR(255),
     legal_representative_name VARCHAR(255),
     corporation_name VARCHAR(255),
