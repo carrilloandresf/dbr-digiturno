@@ -6,7 +6,7 @@ USE DIGITURNO;
 -- Crear la tabla tbUsers
 CREATE TABLE tbUsers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    registration_date DATE,
+    registration_date DATETIME,
     username VARCHAR(50) UNIQUE,
     password VARCHAR(70),
     first_name VARCHAR(250),
@@ -22,10 +22,11 @@ CREATE TABLE tbUsers (
 -- Crear la tabla tbAccessTokens
 CREATE TABLE tbAccessTokens (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    registration_date DATE,
+    registration_date DATETIME,
     token VARCHAR(255),
-    validity DATE,
+    validity DATETIME,
     user_id INT,
+    is_valid BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (user_id) REFERENCES tbUsers(id),
     INDEX (id),
     INDEX (user_id)
@@ -43,7 +44,7 @@ CREATE TABLE tbDialingCodes (
 -- Crear la tabla tbCustomers
 CREATE TABLE tbCustomers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    registration_date DATE,
+    registration_date DATETIME,
     first_name VARCHAR(255),
     last_name VARCHAR(255),
     phone_number VARCHAR(20),
@@ -57,7 +58,7 @@ CREATE TABLE tbCustomers (
 -- Crear la tabla tbTransactionTypes
 CREATE TABLE tbTransactionTypes (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    registration_date DATE,
+    registration_date DATETIME,
     transaction_type VARCHAR(255),
     cost DECIMAL(10, 2),
     price DECIMAL(10, 2),
@@ -70,7 +71,7 @@ CREATE TABLE tbTransactionTypes (
 -- Crear la tabla tbUsersTransaction
 CREATE TABLE tbUsersTransaction (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    registration_date DATE,
+    registration_date DATETIME,
     customer_id INT,
     user_id INT,
     transaction_type_id INT,
@@ -88,7 +89,7 @@ CREATE TABLE tbUsersTransaction (
 -- Crear la tabla tbAccountBalances
 CREATE TABLE tbAccountBalances (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    registration_date DATE,
+    registration_date DATETIME,
     user_id INT,
     movement_type ENUM('debit', 'credit'),
     transaction_value DECIMAL(10, 2),
@@ -101,7 +102,7 @@ CREATE TABLE tbAccountBalances (
 -- tbUserCustomerRelation (Tabla de relación muchos a muchos)
 CREATE TABLE tbUserCustomerRelation (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    registration_date DATE,
+    registration_date DATETIME,
     user_id INT,
     customer_id INT,
     FOREIGN KEY (user_id) REFERENCES tbUsers(id),
