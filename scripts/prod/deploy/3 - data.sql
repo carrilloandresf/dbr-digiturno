@@ -126,3 +126,24 @@ INSERT INTO tbDialingCodes (dialing_code, country_name) VALUES
 ('260', 'Zambia'),
 ('263', 'Zimbabwe'),
 ('358', 'Åland Islands');
+
+
+INSERT INTO tbUsers (
+    username,
+    password,
+    first_name,
+    last_name,
+    address,
+    legal_representative_name,
+    corporation_name,
+    account_balance
+) VALUES (
+    'carrilloandresf',
+    SHA2('1234felipe', 256),
+    'Felipe',
+    'Carrillo',
+    'Calle 5 n 5-5',
+    'Representante Legal',
+    'Nombre de la Corporación',
+    200000.00
+);
