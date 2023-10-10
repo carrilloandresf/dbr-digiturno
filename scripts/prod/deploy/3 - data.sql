@@ -127,6 +127,12 @@ INSERT INTO tbDialingCodes (dialing_code, country_name) VALUES
 ('263', 'Zimbabwe'),
 ('358', 'Åland Islands');
 
+INSERT INTO tbtransactiontypes (
+    transaction_type
+) VALUES (
+    'SMS'
+);
+
 
 INSERT INTO tbUsers (
     username,
