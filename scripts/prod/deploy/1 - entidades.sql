@@ -122,7 +122,11 @@ CREATE TABLE tbUserCustomerRelation (
 );
 
 CREATE VIEW vwLastTransactions AS (
-    SELECT tbUsersTransaction.registration_date, tbcustomers.phone_number, tbtransactiontypes.transaction_type, tbUsersTransaction.message_text
+    SELECT tbUsersTransaction.registration_date
+        , tbcustomers.phone_number
+        , tbtransactiontypes.transaction_type
+        , tbUsersTransaction.message_text
+        , tbUsersTransaction.user_id
     FROM tbUsersTransaction
 	    INNER JOIN tbcustomers 
             ON tbcustomers.id = tbUsersTransaction.customer_id
