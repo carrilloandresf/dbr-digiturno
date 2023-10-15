@@ -120,3 +120,7 @@ CREATE TABLE tbUserCustomerRelation (
     INDEX (customer_id),
     INDEX (registration_date)
 );
+
+CREATE VIEW vwLastTransactions AS (
+    SELECT * FROM tbUsersTransaction WHERE api_accepted =  1 ORDER BY registration_date DESC LIMIT 7
+);
