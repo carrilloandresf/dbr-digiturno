@@ -122,5 +122,12 @@ CREATE TABLE tbUserCustomerRelation (
 );
 
 CREATE VIEW vwLastTransactions AS (
-    SELECT * FROM tbUsersTransaction WHERE api_accepted =  1 ORDER BY registration_date DESC LIMIT 7
+    SELECT tbUsersTransaction.registration_date, tbcustomers.phone_number, tbtransactiontypes.transaction_type, tbUsersTransaction.message_text
+    FROM tbUsersTransaction
+	    INNER JOIN tbcustomers 
+            ON tbcustomers.id = tbUsersTransaction.customer_id
+        INNER JOIN tbtransactiontypes 
+            ON tbtransactiontypes.id = tbUsersTransaction.transaction_type_id
+    WHERE api_accepted =  1 
+    ORDER BY registration_date DESC LIMIT 7
 );
