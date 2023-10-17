@@ -133,5 +133,5 @@ CREATE VIEW vwLastTransactions AS (
         INNER JOIN tbtransactiontypes 
             ON tbtransactiontypes.id = tbUsersTransaction.transaction_type_id
     WHERE api_accepted =  1 
-    ORDER BY registration_date DESC LIMIT 7
+    ORDER BY registration_date DESC LIMIT 8
 );
