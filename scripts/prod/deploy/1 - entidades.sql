@@ -125,7 +125,7 @@ CREATE VIEW vwLastTransactions AS (
     SELECT tbUsersTransaction.registration_date
         , tbcustomers.phone_number
         , tbtransactiontypes.transaction_type
-        , tbUsersTransaction.message_text
+        , SUBSTRING_INDEX(SUBSTRING_INDEX(tbUsersTransaction.message_text, 'turno ', -1), ' se', 1) AS turno
         , tbUsersTransaction.user_id
     FROM tbUsersTransaction
 	    INNER JOIN tbcustomers 
