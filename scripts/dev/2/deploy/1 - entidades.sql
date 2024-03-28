@@ -13,6 +13,16 @@ CREATE TABLE tbQueue (
     INDEX (transaction_type_id)
 );
 
+-- Crear la tabla para relacionar tbimagenes con un grupo de imagenes
+CREATE TABLE tbImageGroup (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    registration_date DATETIME,
+    image_group_name VARCHAR(255),
+    description TEXT,
+    active BOOLEAN DEFAULT TRUE,
+    INDEX (id)
+);
+
 -- Crear la tabla de imagenes publicitarias almacenadas en bits
 CREATE TABLE tbImages (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -22,17 +32,6 @@ CREATE TABLE tbImages (
     image MEDIUMBLOB,
     active BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (imagegroup_id) REFERENCES tbImageGroup(id),
-    INDEX (id),
-    INDEX (user_id)
-);
-
--- Crear la tabla para relacionar tbimagenes con un grupo de imagenes
-CREATE TABLE tbImageGroup (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    registration_date DATETIME,
-    image_group_name VARCHAR(255),
-    description TEXT,
-    active BOOLEAN DEFAULT TRUE,
     INDEX (id)
 );
 
