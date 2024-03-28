@@ -107,6 +107,8 @@ CREATE TABLE tbAccountBalances (
     INDEX (movement_type)
 );
 
+
+
 -- tbUserCustomerRelation (Tabla de relación muchos a muchos)
 CREATE TABLE tbUserCustomerRelation (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -119,4 +121,19 @@ CREATE TABLE tbUserCustomerRelation (
     INDEX (user_id),
     INDEX (customer_id),
     INDEX (registration_date)
+);
+
+CREATE VIEW vwLastTransactions AS (
+    SELECT tbUsersTransaction.registration_date
+        , CONCAT('******', RIGHT(tbcustomers.phone_number,4)) as phone_number
+        , tbtransactiontypes.transaction_type
+        , SUBSTRING_INDEX(SUBSTRING_INDEX(tbUsersTransaction.message_text, 'turno ', -1), ' se', 1) AS turno
+        , tbUsersTransaction.user_id
+    FROM tbUsersTransaction
+	    INNER JOIN tbcustomers 
+            ON tbcustomers.id = tbUsersTransaction.customer_id
+        INNER JOIN tbtransactiontypes 
+            ON tbtransactiontypes.id = tbUsersTransaction.transaction_type_id
+    WHERE api_accepted =  1 
+    ORDER BY registration_date DESC LIMIT 8
 );
