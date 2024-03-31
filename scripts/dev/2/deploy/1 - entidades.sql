@@ -17,7 +17,7 @@ CREATE TABLE tbQueue (
 -- Crear la tabla de contadores de turnos
 CREATE TABLE tbQueueCounter (
     user_id INT PRIMARY KEY,
-    counter INT DEFAULT 0,
+    counter INT DEFAULT 1,
     FOREIGN KEY (user_id) REFERENCES tbUsers(id),
     INDEX (user_id)
 );
