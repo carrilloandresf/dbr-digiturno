@@ -7,6 +7,9 @@ DROP TABLE IF EXISTS tbImages;
 -- Eliminar si existe tabla para relacionar muchos a muchos entre usuarios y grupos de imagenes tbUserImageGroupRelation
 DROP TABLE IF EXISTS tbUserImageGroupRelation;
 
+-- Eliminar si existe tabla de contadores de turnos tbQueueCounter
+DROP TABLE IF EXISTS tbQueueCounter;
+
 -- Eliminar si existe tabla para relacionar tbimagenes con un grupo de imagenes tbImageGroup
 DROP TABLE IF EXISTS tbImageGroup;
 
