@@ -3,6 +3,7 @@ CREATE TABLE tbQueue (
     id INT AUTO_INCREMENT PRIMARY KEY,
     registration_date DATETIME,
     user_id INT,
+    turno_id VARCHAR(3),
     transaction_type_id INT,
     phone_number VARCHAR(20),
     sent_transaction BOOLEAN DEFAULT FALSE,
@@ -11,6 +12,14 @@ CREATE TABLE tbQueue (
     INDEX (id),
     INDEX (user_id),
     INDEX (transaction_type_id)
+);
+
+-- Crear la tabla de contadores de turnos
+CREATE TABLE tbQueueCounter (
+    user_id INT PRIMARY KEY,
+    counter INT DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES tbUsers(id),
+    INDEX (user_id)
 );
 
 -- Crear la tabla para relacionar tbimagenes con un grupo de imagenes
