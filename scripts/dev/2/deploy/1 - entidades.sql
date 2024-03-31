@@ -47,3 +47,24 @@ CREATE TABLE tbUserImageGroupRelation (
     INDEX (user_id),
     INDEX (imagegroup_id)
 );
+
+-- Vista para obtener las imagenes de un usuario
+CREATE VIEW vwUserImages AS
+SELECT
+    tbUsers.id AS user_id,
+    tbUsers.username,
+    tbImages.id AS image_id,
+    tbImages.image_name,
+    tbImages.imagegroup_id,
+    tbImages.image
+FROM
+    tbUsers
+    JOIN tbUserImageGroupRelation 
+        ON tbUsers.id = tbUserImageGroupRelation.user_id
+    JOIN tbImageGroup 
+        ON tbUserImageGroupRelation.imagegroup_id = tbImageGroup.id
+    JOIN tbImages 
+        ON tbImageGroup.id = tbImages.imagegroup_id
+WHERE
+    tbImages.active = TRUE
+    AND tbImageGroup.active = TRUE;
