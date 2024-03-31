@@ -9,3 +9,6 @@ DROP TABLE IF EXISTS tbUserImageGroupRelation;
 
 -- Eliminar si existe tabla para relacionar tbimagenes con un grupo de imagenes tbImageGroup
 DROP TABLE IF EXISTS tbImageGroup;
+
+-- Eliminar si existe vista para obtener las imagenes de un usuario vwUserImages
+DROP VIEW IF EXISTS vwUserImages;
