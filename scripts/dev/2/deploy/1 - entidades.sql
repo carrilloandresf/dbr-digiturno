@@ -28,18 +28,18 @@ CREATE TABLE tbImageGroup (
     registration_date DATETIME,
     image_group_name VARCHAR(255),
     description TEXT,
-    active BOOLEAN DEFAULT TRUE,
+    is_active BOOLEAN DEFAULT TRUE,
     INDEX (id)
 );
 
--- Crear la tabla de imagenes publicitarias almacenadas en bits
+-- Crear la tabla tbImages para almacenar imagenes publicitarias por url
 CREATE TABLE tbImages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     registration_date DATETIME,
     imagegroup_id INT,
     image_name VARCHAR(255),
-    image MEDIUMBLOB,
-    active BOOLEAN DEFAULT TRUE,
+    image_url VARCHAR(255),
+    is_active BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (imagegroup_id) REFERENCES tbImageGroup(id),
     INDEX (id)
 );
@@ -57,6 +57,50 @@ CREATE TABLE tbUserImageGroupRelation (
     INDEX (imagegroup_id)
 );
 
+-- Eliminar si existe tabla tbAccountBalances
+DROP TABLE IF EXISTS tbAccountBalances;
+
+-- Crear la tabla tbAccountBalances
+CREATE TABLE tbAccountBalances (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    registration_date DATETIME,
+    user_id INT,
+    movement_type ENUM('debit', 'credit'),
+    transaction_value DECIMAL(10, 2),
+    balance DECIMAL(10, 2),
+    FOREIGN KEY (user_id) REFERENCES tbUsers(id),
+    INDEX (id),
+    INDEX (user_id),
+    INDEX (movement_type)
+);
+
+-- Crear la tabla tbAccountBalancesdt
+
+CREATE TABLE tbAccountBalancesdt (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    registration_date DATETIME,
+    user_id INT,
+    movement_type ENUM('debit', 'credit'),
+    detail VARCHAR(255),
+    quantity INT,
+    unit_price DECIMAL(10, 2),
+    transaction_value DECIMAL(10, 2),
+    FOREIGN KEY (user_id) REFERENCES tbUsers(id),
+    INDEX (id),
+    INDEX (user_id),
+    INDEX (movement_type)
+);
+
+-- Crear tabla de logs para store procedures
+CREATE TABLE tbLogs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    registration_date DATETIME,
+    log_type ENUM('info', 'warning', 'error'),
+    log_message TEXT,
+    INDEX (id),
+    INDEX (log_type)
+);
+
 -- Vista para obtener las imagenes de un usuario
 CREATE VIEW vwUserImages AS
 SELECT
@@ -65,7 +109,7 @@ SELECT
     tbImages.id AS image_id,
     tbImages.image_name,
     tbImages.imagegroup_id,
-    tbImages.image
+    tbImages.image_url
 FROM
     tbUsers
     JOIN tbUserImageGroupRelation 
@@ -75,5 +119,5 @@ FROM
     JOIN tbImages 
         ON tbImageGroup.id = tbImages.imagegroup_id
 WHERE
-    tbImages.active = TRUE
-    AND tbImageGroup.active = TRUE;
+    tbImages.is_active = TRUE
+    AND tbImageGroup.is_active = TRUE;

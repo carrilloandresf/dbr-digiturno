@@ -127,13 +127,6 @@ INSERT INTO tbDialingCodes (dialing_code, country_name) VALUES
 ('263', 'Zimbabwe'),
 ('358', 'Åland Islands');
 
-INSERT INTO tbtransactiontypes (
-    transaction_type
-) VALUES (
-    'SMS'
-);
-
-
 INSERT INTO tbUsers (
     username,
     password,
@@ -151,5 +144,37 @@ INSERT INTO tbUsers (
     'Calle 5 n 5-5',
     'Representante Legal',
     'Nombre de la Corporación',
-    200000.00
+    null
+);
+
+INSERT INTO tbUsers (
+    username,
+    password,
+    first_name,
+    last_name,
+    address,
+    legal_representative_name,
+    corporation_name,
+    account_balance
+) VALUES (
+    'jsierra',
+    SHA2('1234jsierra', 256),
+    'John',
+    'Sierra',
+    'Calle 5 n 5-5',
+    'Representante Legal',
+    'Nombre de la Corporación',
+    null
+);
+
+INSERT INTO tbtransactiontypes (
+    transaction_type, cost, price, user_id
+) VALUES (
+    'SMS', 8.00, 19.00, 1
+), (
+    'CALL', 12.00, 22.00, 1
+), (
+    'SMS', 8.00, 19.00, 2
+), (
+    'CALL', 12.00, 22.00, 2
 );

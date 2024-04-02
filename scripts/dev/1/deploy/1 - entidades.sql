@@ -67,6 +67,7 @@ CREATE TABLE tbTransactionTypes (
     cost DECIMAL(10, 2),
     price DECIMAL(10, 2),
     user_id INT,
+    is_active BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (user_id) REFERENCES tbUsers(id),
     INDEX (id),
     INDEX (user_id)
@@ -123,6 +124,7 @@ CREATE TABLE tbUserCustomerRelation (
     INDEX (registration_date)
 );
 
+-- Crear la vista vwLastTransactions
 CREATE VIEW vwLastTransactions AS (
     SELECT tbUsersTransaction.registration_date
         , CONCAT('******', RIGHT(tbcustomers.phone_number,4)) as phone_number
